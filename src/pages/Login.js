@@ -21,7 +21,7 @@ export default function Login() {
     try {
       const response = await axios.post('http://localhost:8080/login', credentials);
       localStorage.setItem('token', response.data.token);
-      navigate('/'); // redirect to home after login
+      navigate('/home'); // redirect to home after login
     } catch (err) {
       setError('Invalid credentials');
     }

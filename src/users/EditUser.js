@@ -24,7 +24,7 @@ export default function EditUser() {
     const onSubmit=async(e)=>{
         e.preventDefault();
         await axios.put(`http://localhost:8080/user/${id}`,user)
-        navigate("/")
+        navigate("/home")
 
 
     };
@@ -88,7 +88,7 @@ export default function EditUser() {
                     Submit
                 </button>
 
-                <Link className="btn btn-outline-danger mx-2" to = "/">
+                <Link className="btn btn-outline-danger mx-2" to = "/home">
                     Cancel
                 </Link>
                 </form>

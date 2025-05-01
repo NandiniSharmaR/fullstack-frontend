@@ -1,6 +1,20 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
+
 export default function Navbar() {
+  const navigate = useNavigate();
+
+  // Check if the user is logged in by verifying the token in localStorage
+  const token = localStorage.getItem('token');
+
+  // Function to handle logout
+  const handleLogout = () => {
+    // Clear the token from localStorage
+    localStorage.removeItem('token');
+    // Redirect to login page
+    navigate('/login');
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="container-fluid">
@@ -18,9 +32,20 @@ export default function Navbar() {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <Link className="btn btn-outline-light" to="/adduser">Add User</Link>
 
-      
+        {/* Show 'Add User' button only if the user is logged in */}
+        {token && (
+          <Link className="btn btn-outline-light" to="/adduser">
+            Add User
+          </Link>
+        )}
+
+        {/* Show 'Logout' button only if the user is logged in */}
+        {token && (
+          <button className="btn btn-outline-light" onClick={handleLogout}>
+            Logout
+          </button>
+        )}
       </div>
     </nav>
   );

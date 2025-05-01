@@ -1,3 +1,4 @@
+import PrivateRoute from "./auth/Privateroute";
 import './App.css';
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import Navbar from './layout/Navbar';
@@ -13,21 +14,49 @@ function App() {
   return (
     <div className="App">
       <Router>
-      <Navbar/>
-
-      <Routes>
-        <Route exact path="/" element={<Login/>}/>
-        <Route exact path="/adduser" element={<AddUser/>}/>
-        <Route exact path="/edituser/:id" element={<EditUser/>}/>
-        <Route exact path="/viewuser/:id" element={<ViewUser />} />
-        <Route exact path="/login" element={<Login />} />
-        <Route exact path="/home" element={<Home/>}/>
-      </Routes>
+        <Navbar />
+        <Routes>
+          <Route exact path="/" element={<Login />} />
+          <Route exact path="/login" element={<Login />} />
+          
+          <Route 
+            exact 
+            path="/home" 
+            element={
+              <PrivateRoute>
+                <Home />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            exact 
+            path="/adduser" 
+            element={
+              <PrivateRoute>
+                <AddUser />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            exact 
+            path="/edituser/:id" 
+            element={
+              <PrivateRoute>
+                <EditUser />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            exact 
+            path="/viewuser/:id" 
+            element={
+              <PrivateRoute>
+                <ViewUser />
+              </PrivateRoute>
+            } 
+          />
+        </Routes>
       </Router>
-      
-      
     </div>
   );
-}
-
-export default App;
+} export default App;
